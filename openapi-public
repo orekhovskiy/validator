@@ -1,0 +1,656 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/v1/shows/:
+    get:
+      operationId: shows_list
+      description: Получение списка шоу
+      parameters:
+      - in: query
+        name: page[limit]
+        schema:
+          type: integer
+        description: Limit
+      - in: query
+        name: page[offset]
+        schema:
+          type: integer
+        description: Offset
+      - in: query
+        name: include
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - images
+            - genres
+            - countries
+            - duplicates
+            - tags
+          enum:
+          - countries
+          - duplicates
+          - genres
+          - images
+          - tags
+        description: Include
+      - in: query
+        name: filter[year]
+        schema:
+          type: integer
+        description: Year
+      - in: query
+        name: filter[country]
+        schema:
+          type: string
+        description: Country
+      - in: query
+        name: filter[type]
+        schema:
+          type: string
+          enum:
+          - channel_program
+          - episode_with_season
+          - episode_without_season
+          - movie
+          - season
+          - serial_with_season
+          - serial_without_season
+        description: Type
+      - in: query
+        name: filter[subtitle]
+        schema:
+          type: string
+      - in: query
+        name: filter[channel]
+        schema:
+          type: string
+        description: Channel
+      - in: query
+        name: filter[parent]
+        schema:
+          type: number
+        description: Parent
+      - in: query
+        name: filter[genre]
+        schema:
+          type: string
+          title: Названием
+        description: Genre
+      - in: query
+        name: filter[season]
+        schema:
+          type: integer
+        description: Season
+      - in: query
+        name: filter[episode]
+        schema:
+          type: integer
+        description: Episode
+      - in: query
+        name: filter[part]
+        schema:
+          type: string
+        description: Part
+      tags:
+      - shows
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ShowPublicSerializerList'
+          description: ''
+  /api/v1/shows/{id}/:
+    get:
+      operationId: shows_retrieve
+      description: Получение шоу
+      parameters:
+      - in: query
+        name: include
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - images
+            - genres
+            - countries
+            - duplicates
+            - tags
+          enum:
+          - countries
+          - duplicates
+          - genres
+          - images
+          - tags
+        description: Include
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальное целочисленное значение, идентифицирующее шоу
+        required: true
+      tags:
+      - shows
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ShowPublicSerializerRetrieve'
+          description: ''
+  /api/v1/staff/{staff_id}/shows/:
+    get:
+      operationId: staff_shows_list
+      description: Получение списка шоу
+      parameters:
+      - in: path
+        name: staff_id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the staff
+      - in: query
+        name: page[limit]
+        schema:
+          type: integer
+        description: Limit
+      - in: query
+        name: page[offset]
+        schema:
+          type: integer
+        description: Offset
+      - in: query
+        name: include
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - images
+            - genres
+            - countries
+            - duplicates
+            - tags
+          enum:
+          - countries
+          - duplicates
+          - genres
+          - images
+          - tags
+        description: Include
+      - in: query
+        name: filter[year]
+        schema:
+          type: integer
+        description: Year
+      - in: query
+        name: filter[country]
+        schema:
+          type: string
+        description: Country
+      - in: query
+        name: filter[type]
+        schema:
+          type: string
+          enum:
+          - channel_program
+          - episode_with_season
+          - episode_without_season
+          - movie
+          - season
+          - serial_with_season
+          - serial_without_season
+        description: Type
+      - in: query
+        name: filter[subtitle]
+        schema:
+          type: string
+      - in: query
+        name: filter[channel]
+        schema:
+          type: string
+        description: Channel
+      - in: query
+        name: filter[parent]
+        schema:
+          type: number
+        description: Parent
+      - in: query
+        name: filter[genre]
+        schema:
+          type: string
+          title: Названием
+        description: Genre
+      - in: query
+        name: filter[season]
+        schema:
+          type: integer
+        description: Season
+      - in: query
+        name: filter[episode]
+        schema:
+          type: integer
+        description: Episode
+      - in: query
+        name: filter[part]
+        schema:
+          type: string
+        description: Part
+      tags:
+      - staff
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ShowPublicSerializerList'
+          description: ''
+  /api/v1/staff/{staff_id}/shows/{id}/:
+    get:
+      operationId: staff_shows_retrieve
+      description: Получение шоу
+      parameters:
+      - in: path
+        name: staff_id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the staff
+      - in: query
+        name: include
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - images
+            - genres
+            - countries
+            - duplicates
+            - tags
+          enum:
+          - countries
+          - duplicates
+          - genres
+          - images
+          - tags
+        description: Include
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальное целочисленное значение, идентифицирующее шоу
+        required: true
+      tags:
+      - staff
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ShowPublicSerializerRetrieve'
+          description: ''
+components:
+  schemas:
+    BlankEnum:
+      enum:
+      - ''
+    Included:
+      type: object
+      properties:
+        field_one:
+          type: string
+          description: Field one
+        field_two:
+          type: string
+          description: Field two
+      required:
+      - field_one
+      - field_two
+    IncludedData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Object type
+        id:
+          type: string
+          description: Object ID
+        attributes:
+          $ref: '#/components/schemas/Included'
+      required:
+      - attributes
+      - id
+      - type
+    Links:
+      type: object
+      properties:
+        first:
+          type: string
+          format: uri
+          description: Link to the first page
+        last:
+          type: string
+          format: uri
+          description: Link to last page
+        next:
+          type: string
+          format: uri
+          description: Link to next page
+        prev:
+          type: string
+          format: uri
+          description: Link to previous object
+      required:
+      - first
+      - last
+    Meta:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
+      required:
+      - pagination
+    MpaaEnum:
+      enum:
+      - mpaa_g
+      - mpaa_pg
+      - mpaa_pg13
+      - mpaa_r
+      - mpaa_nc17
+      type: string
+    NullEnum:
+      enum:
+      - null
+    PaginationInfo:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of objects per page
+        limit:
+          type: integer
+          description: Limit of objects per page
+        offset:
+          type: integer
+          description: Offset from the starting object
+      required:
+      - count
+      - limit
+      - offset
+    RelationshipObject:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of related object
+        id:
+          type: string
+          description: ID of related object
+      required:
+      - id
+      - type
+    ShowPublic:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        name:
+          type: string
+          description: Название
+          maxLength: 255
+        year:
+          type: integer
+          maximum: 2100
+          minimum: 1890
+          description: Год выпуска
+        poster-url:
+          type: string
+          nullable: true
+          description: Ссылка на постер
+        vertical-poster-url:
+          type: string
+          nullable: true
+          description: Ссылка на вертикальный постер
+        duration:
+          type: integer
+          maximum: 2147483646
+          minimum: 1
+          nullable: true
+          description: Продолжительность
+        provys-id:
+          type: string
+          format: decimal
+          pattern: ^\d{0,10000}(\.\d{0,0})?$
+          nullable: true
+          description: Идентификатор Provys
+          maximum: 18446744073709551615
+          minimum: 0
+        season-number:
+          type: integer
+          readOnly: true
+          description: Номер сезона
+        episode-number:
+          type: integer
+          readOnly: true
+          description: Номер эпизода
+        sub-name:
+          type: string
+          readOnly: true
+          description: Дополняющий заголовок
+        part:
+          type: string
+          readOnly: true
+          description: Часть
+        original-name:
+          type: string
+          nullable: true
+          description: Название на языке оригинала
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeEnum'
+          description: Тип шоу
+        end-year:
+          type: integer
+          maximum: 2100
+          minimum: 1890
+          nullable: true
+          description: Год окончания сериала
+        channel:
+          type: string
+          nullable: true
+          title: Channel_codename
+          maxLength: 50
+        budget:
+          type: string
+          nullable: true
+          description: Бюджет
+          maxLength: 20
+        age-rating:
+          type: integer
+          maximum: 32767
+          nullable: true
+          description: Возрастное ограничение
+          minimum: 0
+        mpaa:
+          nullable: true
+          description: Рейтинг MPAA
+          oneOf:
+          - $ref: '#/components/schemas/MpaaEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        tagline:
+          type: string
+          nullable: true
+          description: Слоган
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          description: Описание
+          maxLength: 2500
+        synopsis:
+          type: string
+          nullable: true
+          description: Синопсис (краткое описание)
+          maxLength: 1000
+        is-smoking:
+          type: boolean
+          description: Флаг наличии сцен курения
+        trailer-url:
+          type: string
+          nullable: true
+          description: Ссылка на трейлер
+          maxLength: 150
+      required:
+      - name
+      - part
+      - url
+      - year
+    ShowPublicSerializerData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Object type
+        id:
+          type: string
+          description: Object ID
+        attributes:
+          $ref: '#/components/schemas/ShowPublic'
+        relationships:
+          $ref: '#/components/schemas/ShowPublicSerializerRelationships'
+      required:
+      - attributes
+      - id
+      - relationships
+      - type
+    ShowPublicSerializerList:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShowPublicSerializerData'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncludedData'
+      required:
+      - data
+      - included
+    ShowPublicSerializerRelationships:
+      type: object
+      properties:
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        staff:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        awards:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        trivial-data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        premieres:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        gross:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipObject'
+        source-language:
+          $ref: '#/components/schemas/RelationshipObject'
+        parent:
+          $ref: '#/components/schemas/RelationshipObject'
+        season:
+          $ref: '#/components/schemas/RelationshipObject'
+        production-company:
+          $ref: '#/components/schemas/RelationshipObject'
+        duplicates:
+          $ref: '#/components/schemas/RelationshipObject'
+      required:
+      - awards
+      - countries
+      - duplicates
+      - genres
+      - gross
+      - images
+      - links
+      - parent
+      - premieres
+      - ratings
+      - season
+      - staff
+      - tags
+    ShowPublicSerializerRetrieve:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ShowPublicSerializerData'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncludedData'
+      required:
+      - data
+      - included
+    TypeEnum:
+      enum:
+      - movie
+      - serial_with_season
+      - episode_with_season
+      - channel_program
+      - season
+      - serial_without_season
+      - episode_without_season
+      type: string
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer

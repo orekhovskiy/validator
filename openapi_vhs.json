@@ -1,0 +1,2346 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Viewing History Service",
+    "description": "Viewing history service OpenAPI schema",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/continue-watching-items/": {
+      "get": {
+        "tags": [
+          "continue-watching-items"
+        ],
+        "summary": "Get Continue Watching Items",
+        "operationId": "get_continue_watching_items_api_continue_watching_items__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Platform",
+              "type": "string"
+            },
+            "name": "platform",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.api+json;v=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContinueWatchingItemListJsonApi"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorite-items/": {
+      "get": {
+        "tags": [
+          "favorite-items"
+        ],
+        "summary": "Get Favorite Items",
+        "operationId": "get_favorite_items_api_favorite_items__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Platform",
+              "type": "string"
+            },
+            "name": "platform",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteItemListJsonApi"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/check/": {
+      "get": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Check Metadata In Favorites",
+        "operationId": "check_metadata_in_favorites_api_favorites_check__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Metadataid",
+              "type": "string"
+            },
+            "name": "metadataId",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckFavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/add/": {
+      "post": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Add Metadata To Favorites",
+        "operationId": "add_metadata_to_favorites_api_favorites_add__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFavorite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorite"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/add-batch/": {
+      "post": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Add Metadata List To Favorites",
+        "operationId": "add_metadata_list_to_favorites_api_favorites_add_batch__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFavoriteBatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Add Metadata List To Favorites Api Favorites Add Batch  Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/delete/": {
+      "post": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Delete From Favorites",
+        "operationId": "delete_from_favorites_api_favorites_delete__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteFavorite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorite-channels/": {
+      "get": {
+        "tags": [
+          "favorite-channels"
+        ],
+        "summary": "Get Favorite Channels",
+        "operationId": "get_favorite_channels_api_favorite_channels__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Timezone]",
+              "type": "string",
+              "default": ""
+            },
+            "name": "filter[timezone]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Test-Only]",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "filter[test-only]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Test-Include]",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "filter[test-include]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Operator]",
+              "type": "string"
+            },
+            "name": "filter[operator]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Platform",
+              "type": "string"
+            },
+            "name": "platform",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteChannelListJsonApi"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorite-channels/add/": {
+      "post": {
+        "tags": [
+          "favorite-channels"
+        ],
+        "summary": "Add To Favorite Channels",
+        "operationId": "add_to_favorite_channels_api_favorite_channels_add__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFavoriteChannel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteChannel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorite-channels/add-batch/": {
+      "post": {
+        "tags": [
+          "favorite-channels"
+        ],
+        "summary": "Add List To Favorite Channels",
+        "operationId": "add_list_to_favorite_channels_api_favorite_channels_add_batch__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFavoriteChannelBatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Add List To Favorite Channels Api Favorite Channels Add Batch  Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FavoriteChannel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorite-channels/delete/": {
+      "post": {
+        "tags": [
+          "favorite-channels"
+        ],
+        "summary": "Delete From Favorite Channels",
+        "operationId": "delete_from_favorite_channels_api_favorite_channels_delete__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteFavoriteChannel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/internal/action-channel-data/{channel_id}/": {
+      "get": {
+        "tags": [
+          "internal-action-channel-data"
+        ],
+        "summary": "User Action Channel Data By Channel Id",
+        "operationId": "user_action_channel_data_by_channel_id_api_internal_action_channel_data__channel_id___get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Channel Id",
+              "type": "integer"
+            },
+            "name": "channel_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "X-Dre-Id",
+              "type": "string"
+            },
+            "name": "X-DRE-ID",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionChannelData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/internal/action-watch-data/{metadata_id}/": {
+      "get": {
+        "tags": [
+          "internal-action-watch-data"
+        ],
+        "summary": "User Action Watch Data By Metadata Id",
+        "operationId": "user_action_watch_data_by_metadata_id_api_internal_action_watch_data__metadata_id___get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Metadata Id",
+              "type": "integer"
+            },
+            "name": "metadata_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "X-Dre-Id",
+              "type": "string"
+            },
+            "name": "X-DRE-ID",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionWatchData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/last-watch-points/": {
+      "get": {
+        "tags": [
+          "last-watch-points"
+        ],
+        "summary": "Get Last Watch Points",
+        "operationId": "get_last_watch_points_api_last_watch_points__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Vod-Metadata]",
+              "type": "string"
+            },
+            "name": "filter[vod-metadata]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Serial]",
+              "type": "integer"
+            },
+            "name": "filter[serial]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter[Season]",
+              "type": "integer"
+            },
+            "name": "filter[season]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchPointListRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "last-watch-points"
+        ],
+        "summary": "Send Last Watch Point",
+        "operationId": "send_last_watch_point_api_last_watch_points__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.api+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWatchPointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWatchPointRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/last-watch-points/batch/": {
+      "post": {
+        "tags": [
+          "last-watch-points"
+        ],
+        "summary": "Send Last Watch Points Batch",
+        "operationId": "send_last_watch_points_batch_api_last_watch_points_batch__post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.api+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWatchPointsBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWatchPointsBatchRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watching-history-items/": {
+      "get": {
+        "tags": [
+          "watching-history-items"
+        ],
+        "summary": "Get Watching History Items",
+        "operationId": "get_watching_history_items_api_watching_history_items__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Platform",
+              "type": "string"
+            },
+            "name": "platform",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.api+json;v=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchingHistoryItemListJsonApi"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "watching-history-items"
+        ],
+        "summary": "Delete Watching History Items",
+        "operationId": "delete_watching_history_items_api_watching_history_items__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Filter[Vod-Metadata]",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "all"
+                  ],
+                  "type": "string"
+                }
+              ]
+            },
+            "name": "filter[vod-metadata]",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "X-Drm-Token",
+              "type": "string"
+            },
+            "name": "X-DRM-Token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONApiErrors"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionChannelData": {
+        "title": "ActionChannelData",
+        "required": [
+          "is_favorite"
+        ],
+        "type": "object",
+        "properties": {
+          "is_favorite": {
+            "title": "Is Favorite",
+            "type": "boolean"
+          }
+        }
+      },
+      "ActionWatchData": {
+        "title": "ActionWatchData",
+        "required": [
+          "is_favorite"
+        ],
+        "type": "object",
+        "properties": {
+          "metadata_id": {
+            "title": "Metadata Id",
+            "type": "integer"
+          },
+          "is_favorite": {
+            "title": "Is Favorite",
+            "type": "boolean"
+          },
+          "point_second": {
+            "title": "Point Second",
+            "type": "integer"
+          },
+          "watch_status": {
+            "$ref": "#/components/schemas/WatchStatus"
+          }
+        }
+      },
+      "AddFavorite": {
+        "title": "AddFavorite",
+        "required": [
+          "metadataId"
+        ],
+        "type": "object",
+        "properties": {
+          "metadataId": {
+            "title": "Metadataid",
+            "type": "integer"
+          }
+        }
+      },
+      "AddFavoriteBatch": {
+        "title": "AddFavoriteBatch",
+        "required": [
+          "metadataIds"
+        ],
+        "type": "object",
+        "properties": {
+          "metadataIds": {
+            "title": "Metadataids",
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "AddFavoriteChannel": {
+        "title": "AddFavoriteChannel",
+        "required": [
+          "channelId"
+        ],
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "title": "Channelid",
+            "type": "integer"
+          }
+        }
+      },
+      "AddFavoriteChannelBatch": {
+        "title": "AddFavoriteChannelBatch",
+        "required": [
+          "channelIds"
+        ],
+        "type": "object",
+        "properties": {
+          "channelIds": {
+            "title": "Channelids",
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "AddWatchPointAttributes": {
+        "title": "AddWatchPointAttributes",
+        "required": [
+          "second"
+        ],
+        "type": "object",
+        "properties": {
+          "second": {
+            "title": "Second",
+            "maximum": 604800.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "duration-seconds": {
+            "title": "Duration-Seconds",
+            "maximum": 604800.0,
+            "exclusiveMinimum": 0.0,
+            "type": "integer"
+          }
+        }
+      },
+      "AddWatchPointObject": {
+        "title": "AddWatchPointObject",
+        "required": [
+          "type",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/LastWatchPointsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/AddWatchPointAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/WatchPointRelationships"
+          }
+        }
+      },
+      "AddWatchPointRequest": {
+        "title": "AddWatchPointRequest",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AddWatchPointObject"
+          }
+        }
+      },
+      "AddWatchPointsBatchRequest": {
+        "title": "AddWatchPointsBatchRequest",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "title": "Data",
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddWatchPointObject"
+            }
+          }
+        }
+      },
+      "ChannelRelationshipData": {
+        "title": "ChannelRelationshipData",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ChannelRelationshipObject"
+          }
+        }
+      },
+      "ChannelRelationshipObject": {
+        "title": "ChannelRelationshipObject",
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ChannelsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "ChannelsType": {
+        "title": "ChannelsType",
+        "enum": [
+          "channels"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "CheckFavoriteResponse": {
+        "title": "CheckFavoriteResponse",
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "ContinueWatchingItemAttributes": {
+        "title": "ContinueWatchingItemAttributes",
+        "required": [
+          "item-type",
+          "vod-type",
+          "name",
+          "year",
+          "start-watch-second",
+          "last-watch-datetime",
+          "watch-status"
+        ],
+        "type": "object",
+        "properties": {
+          "item-type": {
+            "title": "Item-Type",
+            "enum": [
+              "metadata"
+            ],
+            "type": "string"
+          },
+          "vod-type": {
+            "$ref": "#/components/schemas/ContinueWatchingItemMetadataTypes"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "number",
+            "format": "time-delta"
+          },
+          "poster-url": {
+            "title": "Poster-Url",
+            "type": "string"
+          },
+          "vertical-poster-url": {
+            "title": "Vertical-Poster-Url",
+            "type": "string"
+          },
+          "serial-poster-url": {
+            "title": "Serial-Poster-Url",
+            "type": "string"
+          },
+          "serial-vertical-poster-url": {
+            "title": "Serial-Vertical-Poster-Url",
+            "type": "string"
+          },
+          "monetization-label": {
+            "title": "Monetization-Label",
+            "type": "string"
+          },
+          "end-year": {
+            "title": "End-Year",
+            "type": "integer"
+          },
+          "season-number": {
+            "title": "Season-Number",
+            "type": "integer"
+          },
+          "episode-number": {
+            "title": "Episode-Number",
+            "type": "integer"
+          },
+          "episode-part": {
+            "title": "Episode-Part",
+            "type": "string"
+          },
+          "episode-sub-name": {
+            "title": "Episode-Sub-Name",
+            "type": "string"
+          },
+          "start-watch-second": {
+            "title": "Start-Watch-Second",
+            "type": "integer"
+          },
+          "last-watch-datetime": {
+            "title": "Last-Watch-Datetime",
+            "type": "string",
+            "format": "date-time"
+          },
+          "watch-status": {
+            "$ref": "#/components/schemas/WatchStatus"
+          }
+        }
+      },
+      "ContinueWatchingItemListJsonApi": {
+        "title": "ContinueWatchingItemListJsonApi",
+        "required": [
+          "links",
+          "meta",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/CursorPaginationMeta"
+          },
+          "data": {
+            "title": "Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContinueWatchingItemObject"
+            }
+          }
+        }
+      },
+      "ContinueWatchingItemMetadataTypes": {
+        "title": "ContinueWatchingItemMetadataTypes",
+        "enum": [
+          "movie",
+          "episode"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ContinueWatchingItemObject": {
+        "title": "ContinueWatchingItemObject",
+        "required": [
+          "type",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContinueWatchingItemsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/ContinueWatchingItemAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/ContinueWatchingItemRelationships"
+          }
+        }
+      },
+      "ContinueWatchingItemRelationships": {
+        "title": "ContinueWatchingItemRelationships",
+        "required": [
+          "vod-metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "vod-metadata": {
+            "$ref": "#/components/schemas/app__rest_api__continue_watching_items__schemas__MetadataRelationshipData"
+          },
+          "serial": {
+            "$ref": "#/components/schemas/app__rest_api__continue_watching_items__schemas__MetadataRelationshipData"
+          },
+          "season": {
+            "$ref": "#/components/schemas/app__rest_api__continue_watching_items__schemas__MetadataRelationshipData"
+          }
+        }
+      },
+      "ContinueWatchingItemsType": {
+        "title": "ContinueWatchingItemsType",
+        "enum": [
+          "vod-continue-watching-items"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "CursorPaginationMeta": {
+        "title": "CursorPaginationMeta",
+        "required": [
+          "page"
+        ],
+        "type": "object",
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/PageCursors"
+          }
+        }
+      },
+      "DeleteFavorite": {
+        "title": "DeleteFavorite",
+        "required": [
+          "metadataId"
+        ],
+        "type": "object",
+        "properties": {
+          "metadataId": {
+            "title": "Metadataid",
+            "type": "integer"
+          }
+        }
+      },
+      "DeleteFavoriteChannel": {
+        "title": "DeleteFavoriteChannel",
+        "required": [
+          "channelId"
+        ],
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "title": "Channelid",
+            "type": "integer"
+          }
+        }
+      },
+      "DvbId": {
+        "title": "DvbId",
+        "required": [
+          "service-id",
+          "transport-id",
+          "original-network-id"
+        ],
+        "type": "object",
+        "properties": {
+          "service-id": {
+            "title": "Service-Id",
+            "type": "integer"
+          },
+          "transport-id": {
+            "title": "Transport-Id",
+            "type": "integer"
+          },
+          "original-network-id": {
+            "title": "Original-Network-Id",
+            "type": "integer"
+          }
+        }
+      },
+      "Favorite": {
+        "title": "Favorite",
+        "required": [
+          "id",
+          "dreId",
+          "metadataId",
+          "addedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "dreId": {
+            "title": "Dreid",
+            "type": "string"
+          },
+          "metadataId": {
+            "title": "Metadataid",
+            "type": "integer"
+          },
+          "addedAt": {
+            "title": "Addedat",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FavoriteChannel": {
+        "title": "FavoriteChannel",
+        "required": [
+          "id",
+          "dreId",
+          "channelId",
+          "addedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "dreId": {
+            "title": "Dreid",
+            "type": "string"
+          },
+          "channelId": {
+            "title": "Channelid",
+            "type": "integer"
+          },
+          "addedAt": {
+            "title": "Addedat",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FavoriteChannelAttributes": {
+        "title": "FavoriteChannelAttributes",
+        "required": [
+          "code-name",
+          "name",
+          "is-radio-channel",
+          "is-start-channel",
+          "visible",
+          "is-new",
+          "added-to-favorites-at"
+        ],
+        "type": "object",
+        "properties": {
+          "code-name": {
+            "title": "Code-Name",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "banner-url": {
+            "title": "Banner-Url",
+            "type": "string"
+          },
+          "thumbnail-url": {
+            "title": "Thumbnail-Url",
+            "type": "string"
+          },
+          "stream-url": {
+            "title": "Stream-Url",
+            "type": "string"
+          },
+          "catchup-url": {
+            "title": "Catchup-Url",
+            "type": "string"
+          },
+          "dvb-id": {
+            "$ref": "#/components/schemas/DvbId"
+          },
+          "service-id": {
+            "title": "Service-Id",
+            "type": "integer"
+          },
+          "transport-id": {
+            "title": "Transport-Id",
+            "type": "integer"
+          },
+          "original-network-id": {
+            "title": "Original-Network-Id",
+            "type": "integer"
+          },
+          "satellite-name": {
+            "title": "Satellite-Name",
+            "type": "string"
+          },
+          "satellite-orbit": {
+            "title": "Satellite-Orbit",
+            "type": "string"
+          },
+          "content-id": {
+            "title": "Content-Id",
+            "type": "string",
+            "format": "uuid"
+          },
+          "quality": {
+            "title": "Quality",
+            "type": "string"
+          },
+          "is-radio-channel": {
+            "title": "Is-Radio-Channel",
+            "type": "boolean"
+          },
+          "lcn": {
+            "title": "Lcn",
+            "type": "integer"
+          },
+          "timezones": {
+            "title": "Timezones",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is-start-channel": {
+            "title": "Is-Start-Channel",
+            "type": "boolean"
+          },
+          "visible": {
+            "title": "Visible",
+            "type": "boolean"
+          },
+          "is-new": {
+            "title": "Is-New",
+            "type": "boolean"
+          },
+          "stream-url-exists": {
+            "title": "Stream-Url-Exists",
+            "type": "boolean"
+          },
+          "added-to-favorites-at": {
+            "title": "Added-To-Favorites-At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FavoriteChannelListJsonApi": {
+        "title": "FavoriteChannelListJsonApi",
+        "required": [
+          "links",
+          "meta",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/CursorPaginationMeta"
+          },
+          "data": {
+            "title": "Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoriteChannelObject"
+            }
+          }
+        }
+      },
+      "FavoriteChannelObject": {
+        "title": "FavoriteChannelObject",
+        "required": [
+          "type",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FavoriteChannelsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/FavoriteChannelAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/FavoriteChannelRelationships"
+          }
+        }
+      },
+      "FavoriteChannelRelationships": {
+        "title": "FavoriteChannelRelationships",
+        "required": [
+          "channel"
+        ],
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/ChannelRelationshipData"
+          }
+        }
+      },
+      "FavoriteChannelsType": {
+        "title": "FavoriteChannelsType",
+        "enum": [
+          "favorite-channels"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "FavoriteItemAttributes": {
+        "title": "FavoriteItemAttributes",
+        "required": [
+          "item-type",
+          "vod-type",
+          "name",
+          "year",
+          "added-to-favorites-at"
+        ],
+        "type": "object",
+        "properties": {
+          "item-type": {
+            "title": "Item-Type",
+            "enum": [
+              "metadata"
+            ],
+            "type": "string"
+          },
+          "vod-type": {
+            "$ref": "#/components/schemas/FavoriteItemMetadataTypes"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "number",
+            "format": "time-delta"
+          },
+          "poster-url": {
+            "title": "Poster-Url",
+            "type": "string"
+          },
+          "vertical-poster-url": {
+            "title": "Vertical-Poster-Url",
+            "type": "string"
+          },
+          "monetization-label": {
+            "title": "Monetization-Label",
+            "type": "string"
+          },
+          "end-year": {
+            "title": "End-Year",
+            "type": "integer"
+          },
+          "added-to-favorites-at": {
+            "title": "Added-To-Favorites-At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FavoriteItemListJsonApi": {
+        "title": "FavoriteItemListJsonApi",
+        "required": [
+          "links",
+          "meta",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/CursorPaginationMeta"
+          },
+          "data": {
+            "title": "Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoriteItemObject"
+            }
+          }
+        }
+      },
+      "FavoriteItemMetadataTypes": {
+        "title": "FavoriteItemMetadataTypes",
+        "enum": [
+          "movie",
+          "serial_with_season",
+          "serial_without_season"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "FavoriteItemObject": {
+        "title": "FavoriteItemObject",
+        "required": [
+          "type",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FavoriteItemsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/FavoriteItemAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/FavoriteItemRelationships"
+          }
+        }
+      },
+      "FavoriteItemRelationships": {
+        "title": "FavoriteItemRelationships",
+        "required": [
+          "vod-metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "vod-metadata": {
+            "$ref": "#/components/schemas/app__rest_api__favorite_items__schemas__MetadataRelationshipData"
+          }
+        }
+      },
+      "FavoriteItemsType": {
+        "title": "FavoriteItemsType",
+        "enum": [
+          "vod-favorite-items"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "JSONApiError": {
+        "title": "JSONApiError",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "links": {
+            "title": "Links",
+            "type": "object"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/JSONApiErrorSource"
+          },
+          "meta": {
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "description": "Describe of a single error object specified in JSONApiErrors.\n\nThe format of all fields corresponds to spec: https://jsonapi.org/format/1.1/#errors"
+      },
+      "JSONApiErrorSource": {
+        "title": "JSONApiErrorSource",
+        "type": "object",
+        "properties": {
+          "pointer": {
+            "title": "Pointer",
+            "type": "string"
+          },
+          "parameter": {
+            "title": "Parameter",
+            "type": "string"
+          }
+        }
+      },
+      "JSONApiErrors": {
+        "title": "JSONApiErrors",
+        "required": [
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "errors": {
+            "title": "Errors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JSONApiError"
+            }
+          }
+        },
+        "description": "JSON:API spec error object.\n\nSee Also: https://jsonapi.org/format/1.1/#errors"
+      },
+      "LastWatchPointsType": {
+        "title": "LastWatchPointsType",
+        "enum": [
+          "last-watch-points"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "PageCursors": {
+        "title": "PageCursors",
+        "type": "object",
+        "properties": {
+          "before": {
+            "title": "Before",
+            "type": "string"
+          },
+          "after": {
+            "title": "After",
+            "type": "string"
+          }
+        }
+      },
+      "PaginationLinks": {
+        "title": "PaginationLinks",
+        "type": "object",
+        "properties": {
+          "prev": {
+            "title": "Prev",
+            "type": "string"
+          },
+          "next": {
+            "title": "Next",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "WatchPointAttributes": {
+        "title": "WatchPointAttributes",
+        "required": [
+          "second",
+          "datetime",
+          "watch-status"
+        ],
+        "type": "object",
+        "properties": {
+          "second": {
+            "title": "Second",
+            "maximum": 604800.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "duration-seconds": {
+            "title": "Duration-Seconds",
+            "maximum": 604800.0,
+            "exclusiveMinimum": 0.0,
+            "type": "integer"
+          },
+          "datetime": {
+            "title": "Datetime",
+            "type": "string",
+            "format": "date-time"
+          },
+          "watch-status": {
+            "$ref": "#/components/schemas/WatchStatus"
+          }
+        }
+      },
+      "WatchPointListRequest": {
+        "title": "WatchPointListRequest",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "title": "Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchPointObject"
+            }
+          }
+        }
+      },
+      "WatchPointObject": {
+        "title": "WatchPointObject",
+        "required": [
+          "type",
+          "id",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/LastWatchPointsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/WatchPointAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/WatchPointRelationships"
+          }
+        }
+      },
+      "WatchPointRelationships": {
+        "title": "WatchPointRelationships",
+        "required": [
+          "vod-metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "vod-metadata": {
+            "$ref": "#/components/schemas/app__rest_api__last_watch_points__schemas__MetadataRelationshipData"
+          }
+        }
+      },
+      "WatchStatus": {
+        "title": "WatchStatus",
+        "enum": [
+          "unwatched",
+          "started",
+          "finished"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "WatchingHistoryItemAttributes": {
+        "title": "WatchingHistoryItemAttributes",
+        "required": [
+          "item-type",
+          "vod-type",
+          "name",
+          "year",
+          "start-watch-second",
+          "last-watch-datetime",
+          "watch-status"
+        ],
+        "type": "object",
+        "properties": {
+          "item-type": {
+            "title": "Item-Type",
+            "enum": [
+              "metadata"
+            ],
+            "type": "string"
+          },
+          "vod-type": {
+            "$ref": "#/components/schemas/WatchingHistoryItemMetadataTypes"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "number",
+            "format": "time-delta"
+          },
+          "poster-url": {
+            "title": "Poster-Url",
+            "type": "string"
+          },
+          "vertical-poster-url": {
+            "title": "Vertical-Poster-Url",
+            "type": "string"
+          },
+          "serial-poster-url": {
+            "title": "Serial-Poster-Url",
+            "type": "string"
+          },
+          "serial-vertical-poster-url": {
+            "title": "Serial-Vertical-Poster-Url",
+            "type": "string"
+          },
+          "monetization-label": {
+            "title": "Monetization-Label",
+            "type": "string"
+          },
+          "end-year": {
+            "title": "End-Year",
+            "type": "integer"
+          },
+          "season-number": {
+            "title": "Season-Number",
+            "type": "integer"
+          },
+          "episode-number": {
+            "title": "Episode-Number",
+            "type": "integer"
+          },
+          "episode-part": {
+            "title": "Episode-Part",
+            "type": "string"
+          },
+          "episode-sub-name": {
+            "title": "Episode-Sub-Name",
+            "type": "string"
+          },
+          "start-watch-second": {
+            "title": "Start-Watch-Second",
+            "type": "integer"
+          },
+          "last-watch-datetime": {
+            "title": "Last-Watch-Datetime",
+            "type": "string",
+            "format": "date-time"
+          },
+          "watch-status": {
+            "$ref": "#/components/schemas/WatchStatus"
+          }
+        }
+      },
+      "WatchingHistoryItemListJsonApi": {
+        "title": "WatchingHistoryItemListJsonApi",
+        "required": [
+          "links",
+          "meta",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/CursorPaginationMeta"
+          },
+          "data": {
+            "title": "Data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchingHistoryItemObject"
+            }
+          }
+        }
+      },
+      "WatchingHistoryItemMetadataTypes": {
+        "title": "WatchingHistoryItemMetadataTypes",
+        "enum": [
+          "movie",
+          "episode"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "WatchingHistoryItemObject": {
+        "title": "WatchingHistoryItemObject",
+        "required": [
+          "type",
+          "attributes",
+          "relationships"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/WatchingHistoryItemsType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/WatchingHistoryItemAttributes"
+          },
+          "relationships": {
+            "$ref": "#/components/schemas/WatchingHistoryItemRelationships"
+          }
+        }
+      },
+      "WatchingHistoryItemRelationships": {
+        "title": "WatchingHistoryItemRelationships",
+        "required": [
+          "vod-metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "vod-metadata": {
+            "$ref": "#/components/schemas/app__rest_api__watching_history_items__schemas__MetadataRelationshipData"
+          },
+          "serial": {
+            "$ref": "#/components/schemas/app__rest_api__watching_history_items__schemas__MetadataRelationshipData"
+          },
+          "season": {
+            "$ref": "#/components/schemas/app__rest_api__watching_history_items__schemas__MetadataRelationshipData"
+          }
+        }
+      },
+      "WatchingHistoryItemsType": {
+        "title": "WatchingHistoryItemsType",
+        "enum": [
+          "vod-watching-history-items"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "app__rest_api__continue_watching_items__schemas__MetadataRelationshipData": {
+        "title": "MetadataRelationshipData",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/app__rest_api__continue_watching_items__schemas__MetadataRelationshipObject"
+          }
+        }
+      },
+      "app__rest_api__continue_watching_items__schemas__MetadataRelationshipObject": {
+        "title": "MetadataRelationshipObject",
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/app__rest_api__continue_watching_items__schemas__MetadataType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "app__rest_api__continue_watching_items__schemas__MetadataType": {
+        "title": "MetadataType",
+        "enum": [
+          "vod-metadata"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "app__rest_api__favorite_items__schemas__MetadataRelationshipData": {
+        "title": "MetadataRelationshipData",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/app__rest_api__favorite_items__schemas__MetadataRelationshipObject"
+          }
+        }
+      },
+      "app__rest_api__favorite_items__schemas__MetadataRelationshipObject": {
+        "title": "MetadataRelationshipObject",
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/app__rest_api__favorite_items__schemas__MetadataType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "app__rest_api__favorite_items__schemas__MetadataType": {
+        "title": "MetadataType",
+        "enum": [
+          "vod-metadata"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "app__rest_api__last_watch_points__schemas__MetadataRelationshipData": {
+        "title": "MetadataRelationshipData",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/app__rest_api__last_watch_points__schemas__MetadataRelationshipObject"
+          }
+        }
+      },
+      "app__rest_api__last_watch_points__schemas__MetadataRelationshipObject": {
+        "title": "MetadataRelationshipObject",
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/app__rest_api__last_watch_points__schemas__MetadataType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "app__rest_api__last_watch_points__schemas__MetadataType": {
+        "title": "MetadataType",
+        "enum": [
+          "vod-metadata"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "app__rest_api__watching_history_items__schemas__MetadataRelationshipData": {
+        "title": "MetadataRelationshipData",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/app__rest_api__watching_history_items__schemas__MetadataRelationshipObject"
+          }
+        }
+      },
+      "app__rest_api__watching_history_items__schemas__MetadataRelationshipObject": {
+        "title": "MetadataRelationshipObject",
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/app__rest_api__watching_history_items__schemas__MetadataType"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "app__rest_api__watching_history_items__schemas__MetadataType": {
+        "title": "MetadataType",
+        "enum": [
+          "vod-metadata"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      }
+    }
+  }
+}
