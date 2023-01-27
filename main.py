@@ -9,6 +9,7 @@ from openapi_core.validation.response import openapi_response_validator
 from openapi_core.contrib.requests import RequestsOpenAPIResponse
 import base64
 from jsonschema.validators import RefResolver
+from BodyBuilder import BodyBuilder
 
 
 if __name__ == '__main__':
@@ -66,8 +67,7 @@ if __name__ == '__main__':
 
     ref_resolver = RefResolver.from_schema(spec)
     url, object_schema = ref_resolver.resolve('#/components/schemas/Recipe')
-
-    def build_actual_body(schema: dict, body_sent: dict):
-        actual_body = {}
-        for property_sent in body_sent.keys():
+    builder = BodyBuilder('test')
+    actual_body = builder.build_actual_body(object_schema, validated_data)
+    print(actual_body)
 
