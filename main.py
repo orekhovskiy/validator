@@ -1,5 +1,4 @@
 import json
-import yaml
 from munch import DefaultMunch
 import jsonpickle
 from openapi_core import Spec
@@ -7,7 +6,6 @@ from openapi_core.validation.request import openapi_request_validator
 from openapi_core.contrib.requests import RequestsOpenAPIRequest
 from openapi_core.validation.response import openapi_response_validator
 from openapi_core.contrib.requests import RequestsOpenAPIResponse
-import base64
 from jsonschema.validators import RefResolver
 from BodyBuilder import BodyBuilder
 
@@ -24,12 +22,22 @@ if __name__ == '__main__':
     with open('res.json', 'r') as res_file:
         res_str = res_file.read()
         response = DefaultMunch.fromDict(jsonpickle.decode(res_str))
+        print("response: ", response)
         for i in response.keys():
             response.update({i: jsonpickle.decode(response[i])})
         response.content = response._content
+        print(response.content)
 
     spec = Spec.create(spec_dict)
+    print("spec paths: ", spec.getkey('paths').keys())
+    print("spec items: ", spec.keys())
+    print("spec info: ", spec.getkey('info').keys())
+    print("spec comps: ", spec.getkey('components'))
+
     openapi_request = RequestsOpenAPIRequest(request)
+
+    print("req path: ", openapi_request.path)
+
     result = openapi_request_validator.validate(spec, openapi_request)
 
     # raise errors if request invalid
@@ -52,6 +60,7 @@ if __name__ == '__main__':
 
     # response = contract.http_interactions[0].response
     openapi_response = RequestsOpenAPIResponse(response)
+    print("res url: ", openapi_response.response.url)
     result = openapi_response_validator.validate(spec, openapi_request, openapi_response)
     # raise errors if response invalid
     result.raise_for_errors()
@@ -70,4 +79,13 @@ if __name__ == '__main__':
     builder = BodyBuilder('test')
     actual_body = builder.build_actual_body(object_schema, validated_data)
     print(actual_body)
+
+    with open('openapi2.json', 'r') as spec_file:
+        spec_dict2 = json.load(spec_file)
+    spec2 = Spec.create(spec_dict2)
+    ref_resolver2 = RefResolver.from_schema(spec2)
+    url2, object_schema2 = ref_resolver2.resolve('#/components/schemas/Recipe')
+    print('obj schema 2: ', object_schema2)
+
+    print(builder.validate_schema_by_actual_body(actual_body, object_schema2))
 

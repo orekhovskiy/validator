@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 
 class BodyBuilder:
@@ -20,7 +20,6 @@ class BodyBuilder:
                 'properties': properties,
             }
         elif schema['type'] == 'array':
-            properties = {}
             actual_body = {
                 'title': schema['title'],
                 'type': schema['type'],
@@ -34,6 +33,26 @@ class BodyBuilder:
                 'consumers': [self.consumer_name],
             }
         return actual_body
+
+    def validate_schema_by_actual_body(self, actual_body: dict, schema: dict, path="") -> Tuple[bool, str]:
+        if schema['type'] == actual_body['type']:
+            if schema['type'] == 'object':
+                print('path: ', path)
+                nested_path = f"{path}.{schema['title']}" if path else schema['title']
+                for prop in actual_body['properties'].keys():
+                    if prop in schema['properties'].keys():
+                        (status, msg) = self.validate_schema_by_actual_body(actual_body['properties'][prop], schema['properties'][prop], nested_path)
+                        if not status:
+                            return status, msg
+                    else:
+                        print("prop", prop)
+                        return False, f"Schema is missing property {nested_path}.{prop}"
+            elif schema['type'] == 'array':
+                nested_path = f"{path}.{schema['title']}[]" if path else f"{schema['title']}[]"
+                return self.validate_schema_by_actual_body(actual_body['items'], schema['items'], nested_path)
+        else:
+            return False, f"Type of given schema has unexpected type: expected ${actual_body['type']} but got ${schema['type']} instead"
+        return True, ""
 
     def combine_bodies(self, body: dict, *args: List[dict]):
         if len(args) == 0:
